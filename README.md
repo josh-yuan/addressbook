@@ -1,5 +1,6 @@
 Address Book
 =============
+Joshua's RESTful service for address book.
 
 Dependencies
 ------------
