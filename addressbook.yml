@@ -1,9 +1,9 @@
 mysql:
-    host: 8.8.8.8
-    port: 5672
-    user: guest
-    password: guest
-    vhost: /
+    host: localhost
+    port: 3307
+    database: josh_directory
+    user: root
+    password: \"\"
 
 logging:
   level: INFO
@@ -25,4 +25,3 @@ logging:
       maxFileSize: 10MB
 
 template: addressbook %s
-

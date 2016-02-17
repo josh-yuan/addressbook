@@ -5,6 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import com.addressbook.admin.ServiceShutdownTask;
 import com.addressbook.config.AddressBookConfiguration;
+import com.addressbook.db.MySQLConnection;
 import com.addressbook.health.TemplateHealthCheck;
 import com.addressbook.resources.AddressBookResource;
 
@@ -31,5 +32,6 @@ public class AddressBookApplication extends Application<AddressBookConfiguration
 		environment.healthChecks().register("template", healthCheck);
 		environment.admin().addTask(new ServiceShutdownTask());
 		environment.jersey().register(resource);
+		MySQLConnection.connect(configuration);
 	}
 }

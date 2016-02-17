@@ -13,20 +13,24 @@ public class MySQLConfiguration {
 	@Min(1)
 	@Max(65535)
 	@JsonProperty
-	private int port = 5672;
+	private int port = 3307;
 
 	@NotEmpty
 	@JsonProperty
-	private String user = "guest";
+	private String database;
+	
+	@NotEmpty
+	@JsonProperty
+	private String user;
 
 	@NotEmpty
 	@JsonProperty
-	private String password = "guest";
-
-	@NotEmpty
-	@JsonProperty
-	private String vhost = "/";
-
+	private String password;	
+	
+	public String getDatabase(){
+		return database;
+	}
+	
 	public String getHost() {
 		return host;
 	}
@@ -41,9 +45,5 @@ public class MySQLConfiguration {
 
 	public String getPassword() {
 		return password;
-	}
-
-	public String getVhost() {
-		return vhost;
 	}
 }
