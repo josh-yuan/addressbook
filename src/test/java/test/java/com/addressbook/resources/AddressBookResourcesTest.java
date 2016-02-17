@@ -1,5 +1,6 @@
 package test.java.com.addressbook.resources;
 
+import com.addressbook.resources.AddressBookResource;
 import com.yammer.dropwizard.testing.ResourceTest;
 
 import org.codehaus.jackson.node.JsonNodeFactory;
