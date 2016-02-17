@@ -10,14 +10,19 @@ logging:
 
   loggers:
     "com.addressbook": DEBUG
+    org.hibernate.SQL:
+      level: DEBUG
 
-  file:
-    enabled: true
-    threshold: ALL
-    currentLogFilename: /var/log/addressbook/addressbook.log
-    archivedLogFilenamePattern: /var/log/addressbook/addressbook-%d.log.gz
-    archivedFileCount: 5
-    timeZone: UTC
+  appenders:
+    - type: console
+    - type: file
+      threshold: INFO
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
+      currentLogFilename: /var/log/addressbook/addressbook.log
+      archivedLogFilenamePattern: /var/log/addressbook/addressbook-%d{yyyy-MM-dd}-%i.log.gz
+      archivedFileCount: 5
+      timeZone: UTC
+      maxFileSize: 10MB
 
 template: addressbook %s
 

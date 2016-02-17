@@ -1,11 +1,10 @@
 package com.addressbook.resources;
 
-import com.addressbook.api.exceptions.*;
+import com.addressbook.api.exceptions.NotFoundException;
 
-import com.yammer.dropwizard.logging.Log;
-import com.yammer.metrics.annotation.Timed;
-import org.codehaus.jackson.node.JsonNodeFactory;
-import org.codehaus.jackson.node.ObjectNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -14,37 +13,35 @@ import javax.ws.rs.core.Response.Status;
 @Path("/v1.0")
 @Produces(MediaType.APPLICATION_JSON)
 public class AddressBookResource {
-    private static final Log LOG = Log.forClass(AddressBookResource.class);
-    protected static JsonNodeFactory fact = JsonNodeFactory.instance;
+	private static final Logger LOG = LoggerFactory.getLogger(AddressBookResource.class);
 
-    public AddressBookResource() {
-    }
+	public AddressBookResource() {
+	}
 
-    @Path("/ping")
-    @GET
-    @Timed
-    public Response ping() {
-        try {
-            final Status status = Status.OK;
-            ObjectNode result = fact.objectNode();
-            result.put("status", status.getStatusCode());
-            result.put("message", "pong");
-            return buildResponse(AddressBookResource.class, status, result);
-        } catch (Exception e) {
-            throw handleException(e);
-        }
-    }
+	@Path("/ping")
+	@GET
+	@Timed
+	public Response ping() {
+		try {
+			final Status status = Status.OK;
+			return buildResponse(AddressBookResource.class, status, "pong");
+		} catch (Exception e) {
+			throw handleException(e);
+		}
+	}
 
-    private RuntimeException handleException(Exception ex) {
-        Response.Status status;
-        StringBuilder sb = new StringBuilder();
+	private Response buildResponse(Class<?> resource, Status status, Object entity) {
+		Response.ResponseBuilder builder = Response.created(UriBuilder.fromResource(resource).build());
+		builder.status(status).entity(entity);
+		Response response = builder.build();
+		LOG.debug("Resposne sent: {}", response);
+		return response;
+	}
+
+	private RuntimeException handleException(Exception ex) {
+		Response.Status status;
+		StringBuilder sb = new StringBuilder();
         if (ex instanceof NotFoundException) {
-            sb.append("Topic ").append(ex.getMessage())
-                    .append(" does not exist.");
-            status = Status.NOT_FOUND;
-        } else if (ex instanceof NotFoundException) {
-            sb.append("Message ").append(ex.getMessage())
-                    .append(" does not exist.");
             status = Status.NOT_FOUND;
         } else if (ex instanceof IllegalArgumentException) {
             sb.append("Illegal Argument ").append(ex.getMessage());
@@ -61,18 +58,7 @@ public class AddressBookResource {
                 sb.append('\n');
             }
         }
-        Response response = Response.status(status).entity(sb.toString())
-                .type("text/plain").build();
-        return new WebApplicationException(response);
-    }
-
-    private Response buildResponse(Class<?> resource, Status status,
-            Object entity) {
-        Response.ResponseBuilder builder = Response.created(UriBuilder
-                .fromResource(resource).build());
-        builder.status(status).entity(entity);
-        Response response = builder.build();
-        LOG.debug("Resposne sent: {}", response);
-        return response;
-    }
+		Response response = Response.status(status).entity(sb.toString()).type("text/plain").build();
+		return new WebApplicationException(response);
+	}
 }

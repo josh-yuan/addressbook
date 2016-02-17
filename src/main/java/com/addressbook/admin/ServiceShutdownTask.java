@@ -2,7 +2,8 @@ package com.addressbook.admin;
 
 import java.io.PrintWriter;
 import com.google.common.collect.ImmutableMultimap;
-import com.yammer.dropwizard.tasks.Task;
+
+import io.dropwizard.servlets.tasks.Task;
 
 /**
  * Perform an administrative task to shutdown the whole service
@@ -31,7 +32,7 @@ public class ServiceShutdownTask extends Task {
 
     @Override
     public void execute(ImmutableMultimap<String, String> parameters, PrintWriter output) {
-        output.println("Shutting down Messaging Service...");
+        output.println("Shutting down AddressBook Service...");
         output.flush();
         runtime.exit(0);
     }
