@@ -18,7 +18,7 @@ Run
 ---
 
 1. To start the server, go to the project root directory (the directory of pom.xml) and run:
-    ```java -jar target/addressbook-0.0.1.jar server addressbook.yml```
+    ```java -jar target/addressbook-1.0.0-SNAPSHOT.jar server addressbook.yml```
 
 2. To run the client CLI, make sure the above service is up and run:
     ```java -jar target/addressbook-0.0.1-client.jar```
