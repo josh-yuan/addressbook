@@ -1,4 +1,4 @@
-rabbitmq:
+mysql:
     host: 8.8.8.8
     port: 5672
     user: guest
@@ -9,15 +9,15 @@ logging:
   level: INFO
 
   loggers:
-    "com.lockmarker": DEBUG
+    "com.addressbook": DEBUG
 
   file:
     enabled: true
     threshold: ALL
-    currentLogFilename: /var/log/lockmarker/lockmarker.log
-    archivedLogFilenamePattern: /var/log/lockmarker/lockmarker-%d.log.gz
+    currentLogFilename: /var/log/addressbook/addressbook.log
+    archivedLogFilenamePattern: /var/log/addressbook/addressbook-%d.log.gz
     archivedFileCount: 5
     timeZone: UTC
 
-template: lockmarker %s
+template: addressbook %s
 

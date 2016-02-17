@@ -95,7 +95,7 @@
 									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>com.lockmarker.LockMarkerService</mainClass>
+									<mainClass>com.addressbook.AddressBookService</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>

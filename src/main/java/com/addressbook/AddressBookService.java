@@ -18,15 +18,15 @@ public class AddressBookService extends Service<AddressBookConfiguration> {
         Injector injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
-                // default dispatcher is NopMessagingDispatcher. To override it,
+                // default dispatcher is NopDispatcher. To override it,
                 // pass java command line arg -Ddispatcher=<NewDispatcher>
-                // e.g. java -Ddispatcher=Rabbit -jar msgas-0.0.1.jar server
+                // e.g. java -Ddispatcher=mysql -jar msgas-0.0.1.jar server
                 // msgas.yml
                 String dispatcherClassName = System.getProperty("dispatcher");
-                Class<? extends AddressBook> dispatcherClass = RabbitMQDispatcher.class;
+                Class<? extends AddressBook> dispatcherClass = AddressBook.class;
                 if ((dispatcherClassName != null)
-                        && (dispatcherClassName.indexOf("Rabbit") != -1)) {
-                    dispatcherClass = RabbitMQDispatcher.class;
+                        && (dispatcherClassName.indexOf("mysql") != -1)) {
+                    dispatcherClass = AddressBook.class;
                 }
                 bind(AddressBook.class).to(dispatcherClass);
             }
@@ -40,7 +40,7 @@ public class AddressBookService extends Service<AddressBookConfiguration> {
     }
 
     @Override
-    protected void initialize(MessagingConfiguration configuration,
+    protected void initialize(AddressBookConfiguration configuration,
             Environment environment) {
         try {
             final String template = configuration.getTemplate();

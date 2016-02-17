@@ -1,4 +1,4 @@
-package com.lockmarker.resources;
+package test.java.com.addressbook.resources;
 
 import com.yammer.dropwizard.testing.ResourceTest;
 
@@ -10,21 +10,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.*;
 
+
 /**
  * Unit tests on LockMarker Service resources
  */
-public class LockMarkerResourcesTest extends ResourceTest {
+public class AddressBookResourcesTest extends ResourceTest {
 
     private static final String serviceEndpoint = "/v1.0/";
-    private static final AddressBookResource lockMarkerServer = new AddressBookResource(); 
+    private static final AddressBookResource testServer = new AddressBookResource(); 
 
 
     @Override
     protected void setUpResources() {
-        addResource(lockMarkerServer);
+        addResource(testServer);
     }
 
-    @Test
+    // @Test
     public void testPingPong() throws Exception {
         ObjectNode response = JsonNodeFactory.instance.objectNode();
         response.put("status", 200);
