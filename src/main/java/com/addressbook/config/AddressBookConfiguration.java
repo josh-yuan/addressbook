@@ -1,6 +1,8 @@
 package com.addressbook.config;
 
 import io.dropwizard.Configuration;
+import io.dropwizard.db.DataSourceFactory;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.Valid;
@@ -13,14 +15,19 @@ public class AddressBookConfiguration extends Configuration {
     
     @Valid
     @NotNull
-    @JsonProperty
-    private MySQLConfiguration mysql = new MySQLConfiguration();
+    private DataSourceFactory database = new DataSourceFactory();
+
+    @JsonProperty("database")
+    public void setDataSourceFactory(DataSourceFactory factory) {
+        this.database = factory;
+    }
+
+    @JsonProperty("database")
+    public DataSourceFactory getDataSourceFactory() {
+        return database;
+    }
     
     public String getTemplate() {
         return template;
     }
-    
-    public MySQLConfiguration getMySQLConfiguration() {
-        return mysql;
-    }    
 }

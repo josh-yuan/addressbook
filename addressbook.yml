@@ -1,9 +1,8 @@
-mysql:
-    host: localhost
-    port: 3307
-    database: josh_directory
+database:
+    driverClass: com.mysql.jdbc.Driver
     user: root
-    password: \"\"
+    password: ""
+    url: jdbc:mysql://localhost:3307/josh_directory
 
 logging:
   level: INFO

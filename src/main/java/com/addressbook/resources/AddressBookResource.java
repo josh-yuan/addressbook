@@ -1,10 +1,17 @@
 package com.addressbook.resources;
 
-import com.addressbook.api.exceptions.NotFoundException;
+import com.addressbook.api.application.dao.AddressBookDAO;
+import com.addressbook.api.application.pojo.Student;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.codahale.metrics.annotation.Timed;
+import com.google.common.base.Optional;
+
+import io.dropwizard.hibernate.UnitOfWork;
+import io.dropwizard.jersey.params.LongParam;
+
+import java.util.List;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -14,10 +21,32 @@ import javax.ws.rs.core.Response.Status;
 @Produces(MediaType.APPLICATION_JSON)
 public class AddressBookResource {
 	private static final Logger LOG = LoggerFactory.getLogger(AddressBookResource.class);
+	private AddressBookDAO dao;
 
-	public AddressBookResource() {
+	public AddressBookResource(AddressBookDAO dao) {
+		this.dao = dao;
 	}
 
+    /**
+     * Method to look for a student by her name.
+     *
+     * @param name the id of a student we are looking for.
+     * @return Optional containing the found student's record or an empty Optional otherwise.
+     */
+    @GET
+    @Path("/students")
+    @UnitOfWork
+    public List<Student> findByName(
+            @QueryParam("name") Optional<String> name
+    ) {
+        if (name.isPresent()) {
+            return dao.findByName(name.get());
+        } else {
+            return dao.findAll();
+        }
+    }
+    
+    //////
 	@Path("/ping")
 	@GET
 	@Timed
