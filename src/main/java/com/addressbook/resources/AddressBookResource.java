@@ -21,29 +21,34 @@ import javax.ws.rs.core.Response.Status;
 @Produces(MediaType.APPLICATION_JSON)
 public class AddressBookResource {
 	private static final Logger LOG = LoggerFactory.getLogger(AddressBookResource.class);
-	private AddressBookDAO dao;
+	private final AddressBookDAO dao;
 
 	public AddressBookResource(AddressBookDAO dao) {
 		this.dao = dao;
 	}
 
-    /**
-     * Method to look for a student by her name.
-     *
-     * @param name the id of a student we are looking for.
-     * @return Optional containing the found student's record or an empty Optional otherwise.
-     */
     @GET
     @Path("/students")
+    @Produces(MediaType.APPLICATION_JSON)
     @UnitOfWork
-    public List<Student> findByName(
-            @QueryParam("name") Optional<String> name
-    ) {
-        if (name.isPresent()) {
-            return dao.findByName(name.get());
-        } else {
-            return dao.findAll();
+    public List<Student> findAll() {
+        return dao.findAll();
+    }
+    
+    @GET
+    @Path("/students/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @UnitOfWork
+    public Student findById(@PathParam("id") LongParam id) {
+        return findSafely(id.get());
+    }
+    
+    private Student findSafely(long id) {
+        final Optional<Student> student = dao.findById(id);
+        if (!student.isPresent()) {
+            throw new NotFoundException("No such student found.");
         }
+        return student.get();
     }
     
     //////
