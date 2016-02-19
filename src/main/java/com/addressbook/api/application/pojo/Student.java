@@ -108,4 +108,83 @@ public class Student {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+    
+    public String getLastName(){
+    	return lastName;
+    }
+    
+    public void setLastName(String lastName){
+    	this.lastName = lastName;
+    }
+    
+    public String getPhone(){
+    	return phone;
+    }
+    
+    public void setPhone(String phone){
+    	this.phone = phone;
+    }
+    
+    public String getEmail(){
+    	return email;
+    }
+    
+    public void setEmail(String email){
+    	this.email = email;
+    }
+    
+    public int getGrade(){
+    	return grade;
+    }
+    
+    public void setGrade(int grade){
+    	this.grade = grade;
+    }
+    
+    public String getParents(){
+    	return parents;
+    }
+    
+    public void setParents(String parents){
+    	this.parents = parents;
+    }
+    
+    public String getAddress(){
+    	return address;
+    }
+    
+    public void setAddress(String address){
+    	this.address = address;
+    }
+    
+    public String state(){
+    	return state;
+    }
+    
+    public void setState(String state){
+    	this.state = state;
+    }
+    
+    public String getCity(){
+    	return city;
+    }
+    
+    public void setCity(String city){
+    	this.city = city;
+    }
+    
+    public int getZipCode(){
+    	return zipCode;
+    }
+    
+    public void setZipCode(int zipCode){
+    	this.zipCode = zipCode;
+    }
 }
+
+
+
+
+
+
+
