@@ -15,9 +15,24 @@ import org.joda.time.DateTime;
 @NamedQueries({
         @NamedQuery(
                 name = "com.addressbook.api.application.pojo.Student.findAll",
-                query = "SELECT s FROM Student s"
-        )
-})
+                query = "select s from Student s"
+        ),
+        @NamedQuery(
+        		name = "com.addressbook.api.application.pojo.Student.findByName",
+        		query = "select s from Student s "
+        		+ "where s.firstName like :name "
+        		+ "or s.lastName like :name"),
+        @NamedQuery(
+        		name = "com.addressbook.api.application.pojo.Student.findByParent",
+        		query = "select s from Student s "
+        		+ "where s.parents like :parent"),
+        @NamedQuery(
+        		name = "com.addressbook.api.application.pojo.Student.findByGrade",
+        		query = "select s from Student s "
+        		+ "where s.grade = :grade")
+
+		})
+
 public class Student {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

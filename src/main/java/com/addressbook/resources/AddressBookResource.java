@@ -36,7 +36,7 @@ public class AddressBookResource {
     }
     
     @GET
-    @Path("/students/{id}")
+    @Path("/student/id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @UnitOfWork
     public Student findById(@PathParam("id") LongParam id) {
@@ -49,6 +49,30 @@ public class AddressBookResource {
             throw new NotFoundException("No such student found.");
         }
         return student.get();
+    }
+    
+    @GET
+    @Path("/student/name/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @UnitOfWork
+    public List<Student> findByName(@PathParam("name") String name) {
+    	return dao.findByName(name);
+    }
+    
+    @GET
+    @Path("/student/parent/{parent}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @UnitOfWork
+    public List<Student> findByParent(@PathParam("parent") String parent) {
+    	return dao.findByParent(parent);
+    }
+    
+    @GET
+    @Path("/student/grade/{grade}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @UnitOfWork
+    public List<Student> findByGrade(@PathParam("grade") int grade) {
+    	return dao.findByGrade(grade);
     }
     
     //////
