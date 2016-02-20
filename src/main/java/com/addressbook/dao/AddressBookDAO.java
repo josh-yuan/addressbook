@@ -1,6 +1,6 @@
-package com.addressbook.api.application.dao;
+package com.addressbook.dao;
 
-import com.addressbook.api.application.pojo.Student;
+import com.addressbook.pojo.Student;
 import com.google.common.base.Optional;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;

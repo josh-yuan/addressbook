@@ -1,4 +1,4 @@
-package com.addressbook.api.application.pojo;
+package com.addressbook.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

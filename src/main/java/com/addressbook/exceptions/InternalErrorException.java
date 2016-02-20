@@ -1,4 +1,4 @@
-package com.addressbook.api.exceptions;
+package com.addressbook.exceptions;
 
 public class InternalErrorException extends AddressBookException {
     public InternalErrorException(String why) {
